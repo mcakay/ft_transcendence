@@ -1,0 +1,35 @@
+<div class="chat-container">
+  <div class="chat-sidebar">
+    <ul class="chat-rooms">
+      <li class="chat-room" *ngFor="let room of rooms">
+        <div class="room-name">{{room.name}}</div>
+        <div class="room-description">{{room.description}}</div>
+        <button (click)="joinRoom(room)">Join</button>
+      </li>
+      <li class="chat-room">
+        <div class="room-name"># Create new room</div>
+        <form (submit)="createNewRoom($event)">
+          <input type="text" placeholder="Room name" [(ngModel)]="newRoomName" name="newRoomName">
+          <input type="checkbox" id="password-protected" name="password-protected" value="password-protected" [(ngModel)]="isRoomPasswordProtected" name="isRoomPasswordProtected">
+          <label for="password-protected">Password protected?</label>
+          <input type="password" placeholder="Enter password" class="password-input" [(ngModel)]="roomPassword" name="roomPassword">
+          <button type="submit">Create</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="chat-main">
+    <div class="chat-messages">
+      <div class="message" *ngFor="let message of messages">
+        <div class="message-username">{{message.username}}</div>
+        <div class="message-text">{{message.text}}</div>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type your message here..." [(ngModel)]="newMessage" name="newMessage">
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+
+

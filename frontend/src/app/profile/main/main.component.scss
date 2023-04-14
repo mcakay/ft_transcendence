@@ -2,14 +2,13 @@
 	color: white;
 	background-color: (rgba(0,0,0,0.5));
 	border: 1px solid #ff6a00;
-	height: 100.15%;
+	height: 100%;
 	.card-body
 	{
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: column;
 		align-items: center;
-
 		.profile-image {
 			width: 9vw;
 			height: 9vw;
@@ -53,10 +52,4 @@
 		}
 	}
 	
-}
-
-@media (max-width: 1440px) {
-	p {
-		font-size: 0.7vh;
-	}
 }

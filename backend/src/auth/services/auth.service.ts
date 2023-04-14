@@ -92,6 +92,7 @@ export class AuthService {
 		};
 	}
 
+
     async login(code: string)
     {
         const intraToken = await this.getToken(code);
@@ -118,4 +119,13 @@ export class AuthService {
 		return user;
 	}
 
+	async getUserIntraId(token: string) {
+		return (
+			await this.jwt.verifyAsync(token, {
+				secret: JWT_SECRET,
+			})
+		).intraId;	
+	}
+
+	
 }

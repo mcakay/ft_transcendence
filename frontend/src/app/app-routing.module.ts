@@ -3,45 +3,32 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { PlayComponent } from './play/play.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MarketplaceComponent } from './marketplace/marketplace.component';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SocialComponent } from './social/social.component';
+
 
 const routes: Routes = [
 	{
-		path: '',
-		redirectTo: '/home',
-		pathMatch: 'full'
-	},
-	{
 		path: 'play',
-		component: PlayComponent, canActivate: [AuthGuard]
+		component: PlayComponent
 	},
 	{
 		path: 'profile',
-		component: ProfileComponent, canActivate: [AuthGuard]
+		component: ProfileComponent
 	},
 	{
 		path: 'home',
-		component: HomeComponent, canActivate: [AuthGuard]
+		component: HomeComponent
 	},
 	{
-		path: 'marketplace',
-		component: MarketplaceComponent, canActivate: [AuthGuard]
+		path: 'social',
+		component: SocialComponent
 	},
-	{
-		path: 'login',
-		component: LoginComponent
-	},
-	{
-		path: 'register',
-		component: RegisterComponent
-	}
 ];
 
 @NgModule({
 	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule]
+	exports: [RouterModule],
 })
 export class AppRoutingModule { }
+ 

@@ -4,22 +4,19 @@ import { HttpHeaders } from '@angular/common/http';
 import { Auth } from '../models/auth.model';
 import { RegisterService } from './register.service';
 import { User } from '../models/user.model';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
-@Injectable({ providedIn: 'root'})
+@Injectable()
 export class AuthService
 {
-	private isLoggedIn$ = new BehaviorSubject<boolean>(false);
+	private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
+	isLoggedIn$ = this._isLoggedIn$.asObservable();
 
-
-	constructor(private http: HttpClient, private registerService: RegisterService, private router: Router){
-		if (localStorage.getItem('user') !== null)
-			this.login();
-	}
-
-	isAuthenticated = (): Observable<boolean> => {
-		return this.isLoggedIn$.asObservable();
+	constructor(private http: HttpClient, private registerService: RegisterService){
+		if (localStorage.getItem('user'))
+			this._isLoggedIn$.next(true);
+		else
+			this._isLoggedIn$.next(false);
 	}
 
 	authentication = (address: string, intraToken: string, callback: Function) => {
@@ -40,11 +37,13 @@ export class AuthService
 		this.http.get<User>(address + '/users/me', { headers }).subscribe(
 			res => {
 				localStorage.setItem('user', JSON.stringify(res));
-				if (res.isSigned === false)
+				if (this.registerService.checkRegister(res.isSigned) == false)
 				{
 					this.registerService.beginRegister();
-				}		
-				this.login();
+					return ;
+				}
+				this._isLoggedIn$.next(true);
+				document.location.href = '/home';
 			},
 			err => {
 				console.log(err);
@@ -52,13 +51,8 @@ export class AuthService
 		);
 	}
 
-	login = () => {
-		this.isLoggedIn$.next(true);
-		this.router.navigate(['/']);
-	}
-
-	logout = () => {
-		this.isLoggedIn$.next(false);
+	setLogin = () => {
+		this._isLoggedIn$.next(true);
 	}
 	
 }

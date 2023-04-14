@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { RegisterService } from '../services/register.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { RegisterService } from '../services/register.service';
 })
 export class RegisterComponent {
 
-	constructor(private registerService: RegisterService, private authService: AuthService){}
+	constructor(private registerService: RegisterService){}
 
 	page: number = 0;
 
@@ -53,7 +52,7 @@ export class RegisterComponent {
 	nextPage = () => {
 		if (this.page == 2)
 		{
-			this.registerService.completeRegister(this.authService.login);
+			this.registerService.completeRegister();
 			return;
 		}
 		this.page += 1;

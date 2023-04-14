@@ -19,7 +19,13 @@ import { ProfileNavigatorComponent } from './profile/profile-navigator/profile-n
 import { MatchHistoryComponent } from './profile/match-history/match-history.component';
 import { FooterComponent } from './profile/footer/footer.component';
 import { RegisterComponent } from './register/register.component';
-import { MarketplaceComponent } from './marketplace/marketplace.component';
+import { SocialComponent } from './social/social.component';
+import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://10.11.242.115:3131', options: {} };
+
 
 @NgModule({
   declarations: [
@@ -30,19 +36,22 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
     ChatComponent,
     GameComponent,
     ProfileComponent,
-	HomeComponent,
- MainComponent,
- AchievementsComponent,
- ProfileNavigatorComponent,
- MatchHistoryComponent,
- FooterComponent,
- RegisterComponent,
- MarketplaceComponent
+    HomeComponent,
+    MainComponent,
+    AchievementsComponent,
+    ProfileNavigatorComponent,
+    MatchHistoryComponent,
+    FooterComponent,
+    RegisterComponent,
+    SocialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-	HttpClientModule
+    HttpClientModule,
+    MatListModule,
+    FormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [AuthService, UserService, RegisterService],
   bootstrap: [AppComponent]

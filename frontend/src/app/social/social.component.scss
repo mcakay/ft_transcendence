@@ -1,0 +1,124 @@
+
+$primary-color: #FFA500;
+$background-color: #FFFFFF;
+
+.chat-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background-color;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  
+  .chat-sidebar {
+    width: 25%;
+    background-color: $primary-color;
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    
+    .chat-rooms {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      
+      .chat-room {
+        margin-bottom: 20px;
+        
+        .room-name {
+          font-size: 20px;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        
+        .room-description {
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+        
+        button {
+          background-color: #FFFFFF;
+          color: $primary-color;
+          border: none;
+          border-radius: 5px;
+          padding: 5px 10px;
+          cursor: pointer;
+        }
+        
+        form {
+          margin-top: 10px;
+          
+          input {
+            width: 100%;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+          }
+          
+          button {
+            width: 100%;
+            background-color: #FFFFFF;
+            color: $primary-color;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  
+  .chat-main {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    background-color: #FFFFFF;
+    
+    .chat-messages {
+      height: 400px;
+      overflow-y: scroll;
+      
+      .message {
+        margin-bottom: 10px;
+        
+        .message-username {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        
+        .message-text {
+          margin-bottom: 5px;
+        }
+      }
+    }
+    
+    .chat-input {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      
+      input[type="text"] {
+        flex: 1;
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        margin-right: 10px;
+      }
+      
+      button {
+        background-color: $primary-color;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+

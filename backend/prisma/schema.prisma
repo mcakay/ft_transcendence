@@ -11,62 +11,83 @@ datasource db {
 }
 
 model User {
-  	id        Int      @default(autoincrement()) @id
-	avatarUrl String?
-  	intraId   Int   @unique
-  	email     String   @unique
-  	username  String   @unique
-  	nickname  String?  @unique
-  	createdAt DateTime @default(now())
-  	updatedAt DateTime @updatedAt
-	isSigned  Boolean  @default(false)
+  id        Int      @id @default(autoincrement())
+  avatarUrl String?
+  intraId   Int      @unique
+  email     String   @unique
+  username  String   @unique
+  nickname  String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isSigned  Boolean  @default(false)
 
-	
-	losses    Int      @default(0)
-	wins     Int      @default(0)
-	draws    Int      @default(0)
-	games	Int      @default(0)
-	rating   Int      @default(1500)
-	level	Int      @default(1)
-	rank    Int      @default(0)
-	xp	Int      @default(0)
+  losses Int @default(0)
+  wins   Int @default(0)
+  draws  Int @default(0)
+  games  Int @default(0)
+  rating Int @default(1500)
+  level  Int @default(1)
+  rank   Int @default(0)
+  xp     Int @default(0)
 
-	achievements Achievement[]
-	matches     Match[]
+  achievements Achievement[]
+  matches      Match[]
+  rooms        Room[]        @relation("RoomUser")
+  RoomUser     RoomUser[]
 
-	@@map("users")
+  @@map("users")
+}
+
+model Room {
+  id        Int     @id @default(autoincrement())
+  name      String
+  users     User[]  @relation("RoomUser")
+  isPrivate Boolean @default(false)
+  ownerId   Int     @unique
+
+  RoomUser RoomUser[]
+}
+
+model RoomUser {
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  roomId Int
+  room   Room @relation(fields: [roomId], references: [id])
+
+  @@id([userId, roomId])
+  @@unique([userId, roomId])
 }
 
 model Achievement {
-	id 	  Int      @default(autoincrement()) @id
-	name  String
+  id   Int    @id @default(autoincrement())
+  name String
 
-	isAchieved Boolean @default(false)
-	progress   Int     @default(0)
-	progressMax Int
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
+  isAchieved  Boolean  @default(false)
+  progress    Int      @default(0)
+  progressMax Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-	userId Int
-	user   User @relation(fields: [userId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
-	@@map("achievemets")
+  @@map("achievemets")
 }
 
 model Match {
-	id        Int      @default(autoincrement()) @id
-	opponent String
-	oppenentId Int
-	isWin     Boolean
-	userScore Int
-	opponentScore Int
-	isFinished Boolean @default(false)
-	isDraw    Boolean @default(false)
-	createdAt DateTime @default(now())
-	updatedAt DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  opponent      String
+  oppenentId    Int
+  isWin         Boolean
+  userScore     Int
+  opponentScore Int
+  isFinished    Boolean  @default(false)
+  isDraw        Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-	userId Int
-	user   User @relation(fields: [userId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
-	@@map("matches")
+  @@map("matches")
 }

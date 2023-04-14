@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+      "target": "http://10.11.242.115:3131",
+      "secure": false,
+      "logLevel": "debug"
+    }
+  }
+  
