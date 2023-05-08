@@ -33,6 +33,10 @@ import { WatchComponent } from './components/watch/watch.component';
 import { AchievementsPageComponent } from './components/profile/achievements-page/achievements-page.component';
 import { RouterService } from './services/route.service';
 import { AchievementService } from './services/achievement.service';
+import { ProfileidComponent } from './components/profileid/profileid.component';
+import { NavigationComponent } from './components/profileid/navigation/navigation.component';
+import { PreferencesComponent } from './components/preferences/preferences.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -54,14 +58,19 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 		GameEndComponent,
 		MatchHistoryPageComponent,
 		LeaderboardComponent,
-  WatchComponent,
-  AchievementsPageComponent,
+  		WatchComponent,
+  		AchievementsPageComponent,
+  		ProfileidComponent,
+  		NavigationComponent,
+  		PreferencesComponent,
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		SocketIoModule.forRoot(config)
+		SocketIoModule.forRoot(config),
+		FormsModule,
+		ReactiveFormsModule,
 	],
 	providers: [AuthService,
 			UserService, 

@@ -7,8 +7,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UserService
 {
-
 	constructor(private http: HttpClient) { }
+	
 
 	getUser = () => {
 		const value  = localStorage.getItem('user');
@@ -44,4 +44,9 @@ export class UserService
 			this.setUser(res);
 		});
 	}
+
+	getUserById(id: number) {
+		console.log("girdi bebek burda ikinci durağı intraid");
+		return this.http.get<User>(`${environment.address}/users/${id}`);
+	  }
 }

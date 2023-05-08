@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
 import { RouterService } from 'src/app/services/route.service';
 
+
 @Component({
 	selector: 'app-leaderboard',
 	templateUrl: './leaderboard.component.html',
@@ -11,13 +12,15 @@ import { RouterService } from 'src/app/services/route.service';
 })
 export class LeaderboardComponent {
 
+
 	userLists = [
 		{ name: 'Rating', sorted: [] as User[]},
 		{ name: 'Wins', sorted: [] as User[]},
 		{ name: 'XP', sorted: [] as User[]},
 	];
 
-	constructor(public routerService: RouterService, private leaderboardService: LeaderboardService) { }
+
+	constructor(public routerService: RouterService, private leaderboardService: LeaderboardService,private router: Router) { }
 
 	ngOnInit(): void {
 		this.sortByRating(0);
@@ -45,4 +48,8 @@ export class LeaderboardComponent {
 				this.userLists[index].sorted = users!;
 		});
 	};
+
+	goToProfile(intraId: number) {
+		this.router.navigate(['/profileid', intraId]);
+	  }
 }

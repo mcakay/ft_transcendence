@@ -1,0 +1,124 @@
+.o{
+    margin-top:16%;
+    color: #ff6a00;
+        .account-settings{
+            .user-profile {
+            margin: 0 0 0 0;
+            padding-bottom: 1rem;
+            text-align: center;
+                .user-avatar {
+                    margin: 1rem 0 1rem 0;
+                        img {
+                            width: 50%;
+                            height:50%;
+                            border-radius: 50%;
+                        }
+                }
+                h5.user-name {
+                    margin: 0 0 0.5rem 0;
+                    color: #ff6a00;
+                }
+                h6.nick {
+                    margin: 0;
+                    font-size: 0.8rem;
+                    font-weight: 400;
+                    color:white;
+                }
+            }
+            .about {
+                margin: 1rem 0 0 0;
+                font-size: 0.8rem;
+                color: white;
+                text-align: center;
+            }
+        }
+        .card {
+            background-color: rgba(white, 0.1);
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 0;
+            .card-body{
+                border-style: solid;
+                border-color: #ff6a00;
+                /* The switch - the box around the slider */
+                .switch {
+                  position: relative;
+                  display: inline-block;
+                  width: 60px;
+                  height: 34px;
+                }
+                
+                /* Hide default HTML checkbox */
+                .switch input {
+                  opacity: 0;
+                  width: 0;
+                  height: 0;
+                }
+                
+                /* The slider */
+                .slider {
+                  position: absolute;
+                  cursor: pointer;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background-color: #ccc;
+                  -webkit-transition: .4s;
+                  transition: .4s;
+                }
+                
+                .slider:before {
+                  position: absolute;
+                  content: "";
+                  height: 26px;
+                  width: 26px;
+                  left: 4px;
+                  bottom: 4px;
+                  background-color: white;
+                  -webkit-transition: .4s;
+                  transition: .4s;
+                }
+                
+                input:checked + .slider {
+                  background-color: #2196F3;
+                }
+                
+                input:focus + .slider {
+                  box-shadow: 0 0 1px #2196F3;
+                }
+                
+                input:checked + .slider:before {
+                  -webkit-transform: translateX(26px);
+                  -ms-transform: translateX(26px);
+                  transform: translateX(26px);
+                }
+                
+                /* Rounded sliders */
+                .slider.round {
+                  border-radius: 34px;
+                }
+                
+                .slider.round:before {
+                  border-radius: 50%;
+                }
+            }
+        }
+        .form-control {
+            border: 1px solid #596280;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            font-size: .825rem;
+            background: #ffffff;
+        }
+}
+
+
+
+
+
+
+
+

@@ -11,6 +11,8 @@ import { MatchHistoryPageComponent } from './components/profile/match-history-pa
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { WatchComponent } from './components/watch/watch.component';
 import { AchievementsPageComponent } from './components/profile/achievements-page/achievements-page.component';
+import { ProfileidComponent } from './components/profileid/profileid.component';
+import { PreferencesComponent } from './components/preferences/preferences.component';
 
 const routes: Routes = [
 	{
@@ -59,11 +61,19 @@ const routes: Routes = [
 		component: AchievementsPageComponent, canActivate: [AuthGuard]
 	},
 	{
+		path: 'profileid/:intraId',
+		component: ProfileidComponent
+	},
+	{
+		path: 'preferences',
+		component: PreferencesComponent
+	},
+	{
 		path: '**',
 		redirectTo: '/home',
 		pathMatch: 'full'
 	},
-	
+
 ];
 
 @NgModule({
