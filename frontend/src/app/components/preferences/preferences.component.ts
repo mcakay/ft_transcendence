@@ -15,6 +15,7 @@ export class PreferencesComponent implements OnInit{
   imgFromFile = false;
   player!:User;
   id!: number;
+  fileChanged = false;
 
 
   constructor(private fb: FormBuilder,private userService:UserService) {
@@ -32,7 +33,7 @@ export class PreferencesComponent implements OnInit{
   
   myForm: FormGroup = this.fb.group({
       imgurl: ['',Validators.pattern('^(https?:\\/\\/)?([\\da-z.-]+)\\.([a-z.]{2,6})([\\/\\w .-]*)*\\/?\\.(jpg|jpeg|png|gif)$')],
-      nickname: ['',],
+      nickname: ['', Validators.pattern(/^[a-zA-Z][a-zA-Z0-9]{3,9}$/)],
       twofactor:[false],
   });
 
@@ -67,49 +68,39 @@ export class PreferencesComponent implements OnInit{
   onSubmit() {
     if (this.imgFromUrl && this.myForm.value.imgurl)
     {
-      try {
-        this.userService.updateUser( this.player,
-         ()=> 
-          {
-            this.player.avatarUrl = this.myForm.value.imgurl;
-            localStorage.removeItem('user');
-            localStorage.setItem('user', JSON.stringify(this.player));
-          }, {avatarUrl: this.myForm.value.imgurl} );
-        } catch (error) {
-        console.error('Error updating user:', error);
-        }
+        this.userService.updateUser(this.player, () => {
+          this.player.avatarUrl = this.myForm.value.imgurl;
+          return { avatarUrl: this.myForm.value.imgurl };
+        },  this.myForm.value.imgurl);
     }
     if (this.myForm.value.nickname && this.myForm.value.nickname.trim() !== '')
     {
-      try {
-        this.userService.updateUser( this.player,
-          ()=> 
-           {
-             this.player.avatarUrl = this.myForm.value.imgurl;
-             localStorage.removeItem('user');
-             localStorage.setItem('user', JSON.stringify(this.player));
-           }, {avatarUrl: this.myForm.value.imgurl} );
-         } catch (error) {
-         console.error('Error updating user:', error);
-         }
+        this.userService.updateUser(this.player, () => {
+          this.player.nickname = this.myForm.value.nickname;
+          return { nickname: this.myForm.value.nickname };
+        },  this.myForm.value.nickname);
     }
     console.log(this.myForm.value);
     this.myForm.reset(); 
   }
 
   onUpdate() {
-    try {
-      this.userService.updateUser( this.player,
-        ()=> 
-         {
-           this.player.avatarUrl = this.myForm.value.imgurl;
-           localStorage.removeItem('user');
-           localStorage.setItem('user', JSON.stringify(this.player));
-         }, {avatarUrl: this.myForm.value.imgurl} );
-       } catch (error) {
-       console.error('Error updating user:', error);
-       }
+  if (this.fileChanged){
+    
+    this.userService.updateUser(this.player, () => {
+      localStorage.removeItem('user');
+      localStorage.setItem('user', JSON.stringify(this.player));
+   /*   if (this.fileChanged) {
+     */   // Dosya input alanını sıfırla
+        const inputEl = document.getElementById('imgfile') as HTMLInputElement;
+        inputEl.value = '';
+        this.fileChanged = false;
+     // }
+      return { avatarUrl: this.player.avatarUrl };
+    },  this.player.avatarUrl);
   }
+    }
+
   
   onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -131,15 +122,12 @@ export class PreferencesComponent implements OnInit{
   
     reader.onload = (e: any) => {
       this.player.avatarUrl = e.target.result;
+      this.fileChanged = true;
     };
   
     reader.readAsDataURL(file);
   }
   
-  
-
-
-
 
   onCancel() {
     this.myForm.reset(); 
