@@ -53,23 +53,15 @@ export class PreferencesComponent implements OnInit{
     }
   }
   
-  toggleFieldFile() {
-    this.imgFromFile = !this.imgFromFile;
-    this.imgFromUrl = false;
-  
-    if (this.imgFromFile) {
-      this.myForm.get('imgurl')?.disable();
-      this.myForm.get('imgfile')?.enable();
-    } else {
-      this.myForm.get('imgfile')?.disable();
-    }
-  }
 
   onSubmit() {
     if (this.imgFromUrl && this.myForm.value.imgurl)
     {
         this.userService.updateUser(this.player, () => {
           this.player.avatarUrl = this.myForm.value.imgurl;
+          localStorage.removeItem('user');
+          localStorage.setItem('user', JSON.stringify(this.player));
+          
           return { avatarUrl: this.myForm.value.imgurl };
         },  this.myForm.value.imgurl);
     }
@@ -77,6 +69,8 @@ export class PreferencesComponent implements OnInit{
     {
         this.userService.updateUser(this.player, () => {
           this.player.nickname = this.myForm.value.nickname;
+          localStorage.removeItem('user');
+          localStorage.setItem('user', JSON.stringify(this.player));
           return { nickname: this.myForm.value.nickname };
         },  this.myForm.value.nickname);
     }
