@@ -4,8 +4,50 @@
 		<img src="../../../../assets/icons/home.png" class="icon" (click)="routerService.routeToHome()"/>
 	</div>
 	<div class="page-main">
-		<div class="row">
-
+		<div class="container" style="margin-top: 10%;" >
+			<mat-accordion multi>
+			<mat-expansion-panel [expanded]="true">
+			  <mat-expansion-panel-header>
+				Satın Alınabilir Ürünler
+			  </mat-expansion-panel-header>
+			  <mat-list>
+				<mat-list-item *ngFor="let item of availableItems">
+				<div class="d-flex justify-content-between align-items-center list">
+					  <img src="{{item.image}}" width="100" height="100">
+					  <span>{{ item.name }}</span>
+					  <span>{{ item.price }}</span>
+					  <button  class="basket" (click)="addToCart(item)">Sepete Ekle</button>
+				</div>
+				</mat-list-item>
+			  </mat-list>
+			</mat-expansion-panel>
+		  
+			<mat-expansion-panel style="margin-top: 2%;">
+			  <mat-expansion-panel-header>
+				Satın Alınan Ürünler
+			  </mat-expansion-panel-header>
+			  <mat-list  *ngIf="purchasedItems.length > 0">
+				<mat-list-item *ngFor="let item of purchasedItems">
+				  <div class="d-flex justify-content-between align-items-center list">
+					<img [src]="item.image" width="100" height="100">
+					<span>{{ item.name }}</span>
+					<span>{{ item.price }}</span>
+					<div class="d-flex align-items-center">
+					  <button class="btn-small" (click)="decreaseQuantity(item)"><span>-</span></button>
+					  <span>{{ item.quantity }}</span>
+					  <button class="btn-small" (click)="increaseQuantity(item)"><span>+</span></button>
+					</div>
+					<button  class="basket" (click)="removeFromCart(item)">Sepetten Çıkar</button>
+				  </div>
+				</mat-list-item>
+				<div class="d-flex justify-content-end">
+					<button class="buy" (click)="buybasket()" [disabled]="getTotalPrice() > user.rating">{{getTotalPrice() > user.rating ? 'Yetersiz Bakiye' : 'Satın Al'}}</button>
+				</div>
+			  </mat-list>
+			  <div class="d-flex justify-content-center" *ngIf="purchasedItems.length == 0">Sepetinizde ürün yok.</div>
+			  <div class="d-flex justify-content-center" *ngIf="isbuyed === true">Satın alma işlemi tamamlandı! Kalan bakiyeniz :  {{user.rating}} </div>
+			</mat-expansion-panel>
+		  </mat-accordion>
 		</div>
 	</div>
 </div>

@@ -15,4 +15,15 @@ export class UserService {
     });
     return user;
   }
+
+  async getUserById(intraId: number): Promise<User> {
+    console.log("girdi bebek burda dördüncü durağı intraid");
+    return this.prisma.user.findUnique({
+      where: {
+        intraId: parseInt(intraId.toString())
+      }
+    });
+  }
+
+
 }

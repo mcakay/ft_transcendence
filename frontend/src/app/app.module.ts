@@ -37,6 +37,11 @@ import { ProfileidComponent } from './components/profileid/profileid.component';
 import { NavigationComponent } from './components/profileid/navigation/navigation.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -71,6 +76,11 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 		SocketIoModule.forRoot(config),
 		FormsModule,
 		ReactiveFormsModule,
+		MatExpansionModule,
+		MatListModule,
+		MatIconModule,
+		MatTableModule,
+		NoopAnimationsModule,
 	],
 	providers: [AuthService,
 			UserService, 
@@ -84,6 +94,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 			LeaderboardService, 
 			RouterService,
 			AchievementService,
+			
 	],
 	bootstrap: [AppComponent]
 })

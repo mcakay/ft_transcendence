@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
 import { RouterService } from 'src/app/services/route.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class LeaderboardComponent {
 	];
 
 
-	constructor(public routerService: RouterService, private leaderboardService: LeaderboardService,private router: Router) { }
+	constructor(public routerService: RouterService, private leaderboardService: LeaderboardService,private router: Router,private location:Location) { }
 
 	ngOnInit(): void {
 		this.sortByRating(0);
@@ -51,5 +52,6 @@ export class LeaderboardComponent {
 
 	goToProfile(intraId: number) {
 		this.router.navigate(['/profileid', intraId]);
+		this.location.replaceState('/home');  
 	  }
 }

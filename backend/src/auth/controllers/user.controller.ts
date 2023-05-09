@@ -21,6 +21,14 @@ export class UserController {
     return req.user;
   }
 
+
+  @Get(':id')
+  async getUserById(@Param('id') id: number) {
+    console.log("girdi bebek burda üçüncü durağı intraid");
+    const user = await this.userService.getUserById(id);
+    return user;
+  }
+
   @UseGuards(JwtGuard)
   @Put(':id')
   async updateUser(@Param('id') id: number, @Body() data: any) {

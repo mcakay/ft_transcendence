@@ -42,22 +42,21 @@ export class ProfileidComponent {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,private location: Location,
-  ) { }
+  ) { this.me = this.userService.getUser()!; }
 
   ngOnInit(): void {
-    this.me = this.userService.getUser()!;
-    
     
     const intraId = Number(this.route.snapshot.paramMap.get('intraId'));
     if (!isNaN(intraId)) {
+
       this.userService.getUserById(intraId).subscribe(
        
         (user: User) => {
           if (user) {
             this.user = user;
-            if (this.me.intraId === this.user.intraId) {
+            if (this.me.intraId === this.user.intraId) { 
               this.router.navigate(['/profile']);
-              this.location.replaceState('/profile');
+              this.location.replaceState('/home');  
             }
             this.stats = [
               { value: this.user.wins, label: 'Wins' },
@@ -65,22 +64,21 @@ export class ProfileidComponent {
               { value: this.user.draws, label: 'Draws' },
               { value: this.user.games, label: 'Games' },
               { value: this.user.rating, label: 'Rating' },
-              { value: this.user.rank, label: 'Rank'}
+              { value: this.user.cash.toFixed(2), label: 'Cash'},
             ];
            
           } else {
-            console.log('User not found');
-            this.router.navigate(['/not-found']); // redirect to not-found page
+            alert('User not found');
           }
         },
         (error: any) => {
-          console.log('Error:', error);
-          this.router.navigate(['/error']); // redirect to error page
+          alert('Error: ' + error);
         }
       );
     } else {
-      console.log('Invalid user id');
-      this.router.navigate(['/not-found']); // redirect to not-found page
+      alert('Invalid user id');
     }
   }
+
+  
 }

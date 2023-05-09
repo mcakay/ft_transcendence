@@ -1,0 +1,48 @@
+.page-main{
+    mat-expansion-panel{
+    background-color: (rgba(0,0,0,0.5));
+    color: white;
+    border-color: white; 
+    border-width: 1%;
+    border-style: solid;
+    mat-list{
+        overflow-y: auto;
+        max-height: 30rem;
+        mat-list-item{
+            margin-bottom: 10px; 
+            border-color: white; 
+            border-width: 1%;
+            border-style: solid;
+            background-color: rgba(white, 0.1);
+            height: 100px;
+            .list{
+                color: white;
+            }
+            .btn-small{
+                width: 1.3rem;
+                height: 1.3rem;
+                font-size: 1.2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .basket{
+                background-color: white;
+                color: black;
+            }
+            
+        }
+        .buy{
+            background-color: black;
+            color: white;
+        }
+     
+    }
+    mat-list::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+    
+    }
+    
+}
