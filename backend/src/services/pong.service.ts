@@ -110,7 +110,7 @@ export class PongService {
 	startGame = async (game: Game, server: Server, roomId: string): Promise<void> => {
 		while (game.player1.score < 100 && game.player2.score < 100)
 		{
-			await new Promise(resolve => setTimeout(resolve, 10));
+			await new Promise(resolve => setTimeout(resolve, 10000));
 			this.updateGame(game, server, roomId);
 			server.to(roomId).emit('game', game);
 		}
